@@ -6,8 +6,8 @@ namespace FirstApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.ReadLine();
+            string name=Console.ReadLine();
+            Console.WriteLine($"Hello {name}!");
         }
     }
 }
