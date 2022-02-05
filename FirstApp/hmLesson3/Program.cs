@@ -41,11 +41,14 @@ namespace hmLesson3
                 }
             }
             while (!isParse);
-
-            Console.WriteLine($"-6 * x ^ 3 + 5 * x ^ 2 - 10 * x + 15 = {-6 * Math.Pow(x, 2) + 5 * Math.Pow(x, 2) - 10 * x + 15}");
-            Console.WriteLine($"abs(x) * sin(x) = { Math.Abs(x) * Math.Sin(x)}");
-            Console.WriteLine($"2 * pi * x = {2 * Math.PI * x}");
-            Console.WriteLine($"max(x, y) = {Math.Max(x, y)}\n");
+            double result1 = -6 * Math.Pow(x, 2) + 5 * Math.Pow(x, 2) - 10 * x + 15;
+            double result2 = Math.Abs(x) * Math.Sin(x);
+            double result3 = 2 * Math.PI * x;
+            double result4 = Math.Max(x, y);
+           Console.WriteLine($"-6 * x ^ 3 + 5 * x ^ 2 - 10 * x + 15 = {result1}");
+            Console.WriteLine($"abs(x) * sin(x) = {result2 }");
+            Console.WriteLine($"2 * pi * x = {result3}");
+            Console.WriteLine($"max(x, y) = {result4}\n");
 
             DateTime today = DateTime.Today;
             DateTime pastNY = new DateTime(2022, 1, 1);
