@@ -17,10 +17,9 @@ namespace hmLesson4
             {
                 Console.Write("Enter value of X:");
                 input = Console.ReadLine();
-                if (Int32.TryParse(input, out int buf))
+                if (Int32.TryParse(input, out x))
                 {
                     isParse = true;
-                    x = Int32.Parse(input);
                 }
                 else
                 {
@@ -35,10 +34,9 @@ namespace hmLesson4
             {
                 Console.Write("Enter value of Y:");
                 input = Console.ReadLine();
-                if (Int32.TryParse(input, out int buf))
+                if (Int32.TryParse(input, out y))
                 {
                     isParse = true;
-                    y = Int32.Parse(input);
                 }
                 else
                 {
