@@ -7,10 +7,10 @@ namespace classwork.lesson_3_condition_loop
         static void Main(string[] args)
         {
 
-            int x = 0;
-            int y = 0;
+            double x = 0;
+            double y = 0;
             string input;
-            int result = 0;
+            double result = 0;
             bool isParse = false;
             //МОГУ СДЕЛАТЬ ЧТОБЫ ПРИ НЕВЕРНОМ ВВОДЕ ПРОГРАММА ЗАВЕРШАЛАСЬ,
             //НО ПОМОЕМУ ЭТО НЕАДЕКВАТНО, БУДЕТ ПРОСИТЬ ПОВТОРНО ВВЕСТИ ЧИСЛО
@@ -18,14 +18,14 @@ namespace classwork.lesson_3_condition_loop
             {
                 Console.Write("Enter value of X:");
                 input = Console.ReadLine();
-                if (Int32.TryParse(input, out x))
+                if (double.TryParse(input, out x))
                 {
                     isParse = true;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("!!!Need input integer numbers!!!");
+                    Console.WriteLine("!!!Need input numbers!!!");
                     Console.ResetColor();
                 }
             }
@@ -35,14 +35,14 @@ namespace classwork.lesson_3_condition_loop
             {
                 Console.Write("Enter value of Y:");
                 input = Console.ReadLine();
-                if (Int32.TryParse(input, out y))
+                if (double.TryParse(input, out y))
                 {
                     isParse = true;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("!!!Need input integer numbers!!!");
+                    Console.WriteLine("!!!Need input numbers!!!");
                     Console.ResetColor();
                 }
             }
@@ -65,9 +65,12 @@ namespace classwork.lesson_3_condition_loop
                         result = x * y;
                         break;
                     case "4":
+                        //Проверка деления на ноль
                         if (y==0)
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("\n!!!На ноль делить нельзя!!!\n");
+                            Console.ResetColor();
                             continue;
                         }
                         result = x / y;
@@ -76,13 +79,17 @@ namespace classwork.lesson_3_condition_loop
                         break;
                     default:
                         wrong = true;
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\n!!!Введен неверный вариант!!!\n");
+                        Console.ResetColor();
                         break;
 
                 }
-                if (input!="0")
+                if (!wrong && input != "0")
                 {
-                    Console.WriteLine($"\nТвой ответ: {result}\n");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine($"\nТвой ответ: {result}\n------------------------------\n");
+                    Console.ResetColor();
                 }
             } while (wrong || input!="0");
         }
