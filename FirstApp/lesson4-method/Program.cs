@@ -78,7 +78,7 @@ namespace lesson4_method
             double[] numbers = { x, y, z, q };
             return numbers.Min();
         }
-        static bool isSumOdd(double x, double y, out double sum)
+        static bool IsSumOdd(double x, double y, out double sum)
         {
             bool isOdd = false;
             sum = x + y;
@@ -104,12 +104,13 @@ namespace lesson4_method
             double[] numbersFP = new double[n];
             for (int i = 0; i < n; i++)
             {
-                numbersInt[i] = rnd.Next(100);
+                numbersInt[i] = rnd.Next(10);
                 numbersFP[i] = rnd.NextDouble();
                 numbersFP[i] += numbersInt[i];
             }
             return numbersFP;
-        }        static void Main(string[] args)
+        } 
+        static void Main(string[] args)
         {
             double[] numbers = RandomGenerator(4);
             double sum = 0;
@@ -119,9 +120,9 @@ namespace lesson4_method
             double minfrom3 = Min(numbers[0], numbers[1], numbers[2]);
             double maxfrom4 = Max(numbers[0], numbers[1], numbers[2], numbers[3]);
             double minfrom4 = Min(numbers[0], numbers[1], numbers[2], numbers[3]);
-            bool isOdd = isSumOdd(numbers[0], numbers[1], out sum);
+            bool isOdd = IsSumOdd(numbers[0], numbers[1], out sum);
             string str = "something|";
-            int num = 3;
+            int num = (int)numbers[0];
             for (int i = 0; i < numbers.Length; i++)
             {
                 Console.WriteLine(numbers[i]);
