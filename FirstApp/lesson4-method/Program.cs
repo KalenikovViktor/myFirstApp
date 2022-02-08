@@ -96,9 +96,22 @@ namespace lesson4_method
             }
             Console.Write("\n");
         }
-        static void Main(string[] args)
+        static double[] RandomGenerator(int n)
         {
-            double[] numbers = {3, 3.5, 5, 5.2 };
+
+            Random rnd = new Random();
+            int[] numbersInt = new int[n];
+            double[] numbersFP = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                numbersInt[i] = rnd.Next(100);
+                numbersFP[i] = rnd.NextDouble();
+                numbersFP[i] += numbersInt[i];
+            }
+            return numbersFP;
+        }        static void Main(string[] args)
+        {
+            double[] numbers = RandomGenerator(4);
             double sum = 0;
             double maxfrom2 = Max(numbers[0], numbers[1]);
             double minfrom2 = Min(numbers[0], numbers[1]);
@@ -106,10 +119,13 @@ namespace lesson4_method
             double minfrom3 = Min(numbers[0], numbers[1], numbers[2]);
             double maxfrom4 = Max(numbers[0], numbers[1], numbers[2], numbers[3]);
             double minfrom4 = Min(numbers[0], numbers[1], numbers[2], numbers[3]);
-
             bool isOdd = isSumOdd(numbers[0], numbers[1], out sum);
             string str = "something|";
             int num = 3;
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Console.WriteLine(numbers[i]);
+            }
             Console.WriteLine($"Maximum among 2 numbers: {maxfrom2}");
             Console.WriteLine($"Minimum among 2 numbers: {minfrom2}");
             Console.WriteLine($"Maximum among 3 numbers: {maxfrom3}");
