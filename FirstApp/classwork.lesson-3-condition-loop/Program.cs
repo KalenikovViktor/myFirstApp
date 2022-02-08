@@ -12,6 +12,7 @@ namespace classwork.lesson_3_condition_loop
             string input;
             double result = 0;
             bool isParse = false;
+            bool wrong = false;
             //МОГУ СДЕЛАТЬ ЧТОБЫ ПРИ НЕВЕРНОМ ВВОДЕ ПРОГРАММА ЗАВЕРШАЛАСЬ,
             //НО ПОМОЕМУ ЭТО НЕАДЕКВАТНО, БУДЕТ ПРОСИТЬ ПОВТОРНО ВВЕСТИ ЧИСЛО
             do
@@ -47,7 +48,6 @@ namespace classwork.lesson_3_condition_loop
                 }
             }
             while (!isParse);
-            bool wrong = false;
             do
             {
                 wrong = false;
