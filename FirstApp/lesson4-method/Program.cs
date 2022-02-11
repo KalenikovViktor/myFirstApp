@@ -64,6 +64,10 @@ namespace lesson4_method
             double[] numbers = { x, y, z, q };
             return numbers.Max();
         }
+        static double Max(params double[] numbers)
+        {
+            return numbers.Max();
+        }
         static double Min(double x, double y)
         {
             return Math.Min(x, y);
@@ -78,41 +82,41 @@ namespace lesson4_method
             double[] numbers = { x, y, z, q };
             return numbers.Min();
         }
+        static double Min(params double[] numbers)
+        {
+            return numbers.Min();
+        }
         static bool IsSumOdd(double x, double y, out double sum)
         {
-            bool isOdd = false;
             sum = x + y;
-            if (sum % 2 == 0)
-            {
-                isOdd = true;
-            }
-            return isOdd;
+            return sum % 2 == 0;
         }
         static void Repeat(string str, int length)
         {
-            for (int i = 0; i < length; i++)
+            if (length == 0)
             {
-                Console.Write(str);
+                Console.WriteLine();
+                return;
             }
-            Console.Write("\n");
+            Console.Write(str);
+            Repeat(str, length - 1);
         }
         static double[] RandomGenerator(int n)
         {
-
             Random rnd = new Random();
             int[] numbersInt = new int[n];
             double[] numbersFP = new double[n];
             for (int i = 0; i < n; i++)
             {
-                numbersInt[i] = rnd.Next(10);
+                numbersInt[i] = rnd.Next(1,10);
                 numbersFP[i] = rnd.NextDouble();
                 numbersFP[i] += numbersInt[i];
             }
             return numbersFP;
-        } 
+        }
         static void Main(string[] args)
         {
-            double[] numbers = RandomGenerator(4);
+            double[] numbers = RandomGenerator(5);
             double sum = 0;
             double maxfrom2 = Max(numbers[0], numbers[1]);
             double minfrom2 = Min(numbers[0], numbers[1]);
@@ -120,6 +124,10 @@ namespace lesson4_method
             double minfrom3 = Min(numbers[0], numbers[1], numbers[2]);
             double maxfrom4 = Max(numbers[0], numbers[1], numbers[2], numbers[3]);
             double minfrom4 = Min(numbers[0], numbers[1], numbers[2], numbers[3]);
+            double maxfrom5 = Max(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4]);
+            double minfrom5 = Min(numbers[0], numbers[1], numbers[2], numbers[3], numbers[4]);
+            double maxfrom5v2 = Max(numbers);
+            double minfrom5v2 = Min(numbers);
             bool isOdd = IsSumOdd(numbers[0], numbers[1], out sum);
             string str = "something|";
             int num = (int)numbers[0];
@@ -133,6 +141,10 @@ namespace lesson4_method
             Console.WriteLine($"Minimum among 3 numbers: {minfrom3}");
             Console.WriteLine($"Maximum among 4 numbers: {maxfrom4}");
             Console.WriteLine($"Minimum among 4 numbers: {minfrom4}");
+            Console.WriteLine($"Maximum among 5 numbers: {maxfrom5}");
+            Console.WriteLine($"Minimum among 5 numbers: {minfrom5}");
+            Console.WriteLine($"Maximum among 5 numbers v2: {maxfrom5}");
+            Console.WriteLine($"Minimum among 5 numbers v2: {minfrom5}");
             Console.WriteLine($"Sum is odd? {isOdd}");
             Console.WriteLine($"Sum is: {sum}");
             Repeat(str, num);
