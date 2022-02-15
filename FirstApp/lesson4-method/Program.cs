@@ -143,8 +143,8 @@ namespace lesson4_method
             Console.WriteLine($"Minimum among 4 numbers: {minfrom4}");
             Console.WriteLine($"Maximum among 5 numbers: {maxfrom5}");
             Console.WriteLine($"Minimum among 5 numbers: {minfrom5}");
-            Console.WriteLine($"Maximum among 5 numbers v2: {maxfrom5}");
-            Console.WriteLine($"Minimum among 5 numbers v2: {minfrom5}");
+            Console.WriteLine($"Maximum among 5 numbers v2: {maxfrom5v2}");
+            Console.WriteLine($"Minimum among 5 numbers v2: {minfrom5v2}");
             Console.WriteLine($"Sum is odd? {isOdd}");
             Console.WriteLine($"Sum is: {sum}");
             Repeat(str, num);
