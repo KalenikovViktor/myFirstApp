@@ -10,7 +10,7 @@ namespace HW_lesson_7_strings
             Asc,
             Desc,
         }
-        static void ShowArray(char[] arr, string str = "")
+        static void ShowCharArray(char[] arr, string str = "")
         {
             foreach (char item in arr)
             {
@@ -51,7 +51,20 @@ namespace HW_lesson_7_strings
         }
         static bool Compare(string str, string str2)
         {
-            return str == str2;
+            if (str.Length != str2.Length)
+            {
+                return false;
+            }
+            str=str.ToLower();
+            str2=str2.ToLower();
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i]!=str2[i])
+                {
+                    return false;
+                }
+            }
+            return true;
         }
         static int[] Analyze(string str)
         {
@@ -119,7 +132,7 @@ namespace HW_lesson_7_strings
             Console.WriteLine($"В строке {str3}\n{resultAnalyze[0]} букв, {resultAnalyze[1]} цифр(ы), {resultAnalyze[2]} символ(ов)\n");
             Console.WriteLine($"Отсортированная строка {str}\n {Sort(str)}\n");
             Console.WriteLine($"В строке {str} повторяются такие символы:");
-            ShowArray(Duplicate(str));
+            ShowCharArray(Duplicate(str));
         }
     }
 }
