@@ -19,7 +19,15 @@ namespace HW_lesson_8_text
         }
         static string ReadBook(string filePath)
         {
-            return File.ReadAllText(filePath); ;
+            try
+            {
+                return File.ReadAllText(filePath);
+            }
+            catch (Exception e)
+            {
+                ColoringAndPrint($"!!!{e.Message}!!!\n", ConsoleColor.Red);
+                return null;
+            }
         }
         static void ShowBook((string name, string lastName, int number)[] book)
         {
@@ -179,12 +187,21 @@ namespace HW_lesson_8_text
         }
         static void Main(string[] args)
         {
-            string filePath = "D:\\PhoneBook.csv";
+            string filePath = "PhoneBook.csv";
             string content = ReadBook(filePath);
-            string[] names = content.Split("\r\n");
+            string[] names = {""};
+            try
+            {
+                names = content.Split("\r\n");
+            }
+            catch (Exception e)
+            {
+                ColoringAndPrint($"!!!{e.Message}!!!\n", ConsoleColor.Red);
+            }
             var book = InsertInBook(names);
             string searchQuery = "e";
-            string searchQuery2 = "987654321";
+            string searchQuery2 = "661234579";
+
             ColoringAndPrint("Origin PhoneBook:", ConsoleColor.Blue);
             ShowBook(book);
             ColoringAndPrint($"Result of searching by \"{searchQuery}\":", ConsoleColor.Blue);

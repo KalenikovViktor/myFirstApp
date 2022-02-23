@@ -404,3 +404,8 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio
+/FirstApp/lesson-8-text/lesson-8-text.csproj
+/FirstApp/lesson-8-text/Program.cs
+/FirstApp/lesson-8-text/PhoneBook.csv
+/FirstApp/HW-lesson-9-exceptions/Program.cs
+/FirstApp/HW-lesson-9-exceptions/HW-lesson-9-exceptions.csproj
