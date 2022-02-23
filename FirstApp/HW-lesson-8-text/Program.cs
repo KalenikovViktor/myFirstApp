@@ -29,6 +29,10 @@ namespace HW_lesson_8_text
                 return null;
             }
         }
+        static void WriteBook(string[] str, string filePath)
+        {
+            File.WriteAllLines(filePath, str);
+        }
         static void ShowBook((string name, string lastName, int number)[] book)
         {
             foreach (var item in book)
@@ -52,9 +56,9 @@ namespace HW_lesson_8_text
             }
             Console.WriteLine();
         }
-        static (string, string, int)[] InsertInBook(string[] names)
+        static (string, string, int)[] Deserialize(string[] names)
         {
-            Regex regex = new Regex(@"^(\w+);(\w*);(\d+)$");
+            Regex regex = new Regex(@"^([{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?);(\w+);(\w*);(\d+)$");
             var book = new (string name, string lastName, int number)[names.Length];
             int z = 0;
             for (int i = 0; i < names.Length; i++)
@@ -97,15 +101,15 @@ namespace HW_lesson_8_text
             var result = ("", "", 0);
             if (int.TryParse(searchQuery, out search))
             {
-                for (int i = 0, y = book.Length - 1; i!=y ;)
+                for (int i = 0, y = book.Length - 1; i != y;)
                 {
                     if (book[(i + y) / 2].number > search)
                     {
-                        y = (i + y) / 2;
+                        y = (i + y) / 2 - 1;
                     }
                     else if (book[(i + y) / 2].number < search)
                     {
-                        i = (i + y) / 2;
+                        i = (i + y) / 2 + 1;
                     }
                     else
                     {
@@ -119,47 +123,63 @@ namespace HW_lesson_8_text
         static (string, string, int)[] SortByName((string name, string lastName, int number)[] book)
         {
             var buf = book[0];
-            //var resultBook = new (string name, string lastName, int number)[book.Length];
-            for (int i = 0; i < book.Length; i++)
+            try
             {
-                int minID = i;
-                for (int y = i + 1; y < book.Length - 1; y++)
+                for (int i = 0; i < book.Length; i++)
                 {
-                    if (book[y].name.CompareTo(book[minID].name) == -1)
+                    int minID = i;
+                    for (int y = i + 1; y < book.Length - 1; y++)
                     {
-                        minID = y;
+                        if (book[y].name.CompareTo(book[minID].name) == -1)
+                        {
+                            minID = y;
+                        }
+                    }
+                    if (minID != i)
+                    {
+                        buf = book[minID];
+                        book[minID] = book[i];
+                        book[i] = buf;
                     }
                 }
-                if (minID != i)
-                {
-                    buf = book[minID];
-                    book[minID] = book[i];
-                    book[i] = buf;
-                }
+
+            }
+            catch (Exception e)
+            {
+                ColoringAndPrint($"!!!{e.Message}!!!\n", ConsoleColor.Red);
             }
             return book;
         }
         static (string, string, int)[] SortByLastName((string name, string lastName, int number)[] book)
         {
             var buf = book[0];
-            //var resultBook = new (string name, string lastName, int number)[book.Length];
-            for (int i = 0; i < book.Length; i++)
+            try
             {
-                int minID = i;
-                for (int y = i + 1; y < book.Length - 1; y++)
+                for (int i = 0; i < book.Length; i++)
                 {
-                    if (book[y].lastName.CompareTo(book[minID].lastName) == -1)
+                    int minID = i;
+                    for (int y = i + 1; y < book.Length - 1; y++)
                     {
-                        minID = y;
+                        if (book[y].lastName.CompareTo(book[minID].lastName) == -1)
+                        {
+                            minID = y;
+                        }
+                    }
+                    if (minID != i)
+                    {
+                        buf = book[minID];
+                        book[minID] = book[i];
+                        book[i] = buf;
                     }
                 }
-                if (minID != i)
-                {
-                    buf = book[minID];
-                    book[minID] = book[i];
-                    book[i] = buf;
-                }
+
             }
+            catch (Exception e)
+            {
+                ColoringAndPrint($"!!!{e.Message}!!!\n", ConsoleColor.Red);
+            }
+            //var resultBook = new (string name, string lastName, int number)[book.Length];
+
             return book;
         }
         static (string, string, int)[] SortByNumber((string name, string lastName, int number)[] book)
@@ -185,11 +205,16 @@ namespace HW_lesson_8_text
             }
             return book;
         }
+        private static (Guid guid, string name, int number) GenerateRecord(string[] names)
+        {
+            var random = new Random();
+            return (Guid.NewGuid(), names[random.Next(names.Length)], random.Next());
+        }
         static void Main(string[] args)
         {
             string filePath = "PhoneBook.csv";
             string content = ReadBook(filePath);
-            string[] names = {""};
+            string[] names = { "" };
             try
             {
                 names = content.Split("\r\n");
@@ -198,10 +223,15 @@ namespace HW_lesson_8_text
             {
                 ColoringAndPrint($"!!!{e.Message}!!!\n", ConsoleColor.Red);
             }
-            var book = InsertInBook(names);
+            foreach (var item in names)
+            {
+                Console.WriteLine(item);
+            }
+            var book = Deserialize(names);
             string searchQuery = "e";
             string searchQuery2 = "661234579";
 
+            Console.WriteLine(Guid.NewGuid());
             ColoringAndPrint("Origin PhoneBook:", ConsoleColor.Blue);
             ShowBook(book);
             ColoringAndPrint($"Result of searching by \"{searchQuery}\":", ConsoleColor.Blue);
